@@ -83,11 +83,12 @@ JOIN address ON
 staff.address_id = address.address_id;
 
 #6b
-SELECT staff.first_name, staff.last_name, payment.amount, payment.payment_date
+SELECT staff.first_name, staff.last_name, SUM(payment.amount) AS "total amount"
 FROM staff
 JOIN payment ON 
 staff.staff_id = payment.staff_id
-WHERE MONTH(payment.payment_date) = 08 AND YEAR(payment.payment_date)=2005;
+WHERE MONTH(payment.payment_date) = 08 AND YEAR(payment.payment_date)=2005
+GROUP BY staff.first_name, staff.last_name;
 
 #6c
 SELECT film.title AS 'Film', COUNT(film_actor.actor_id) AS 'Number of Actors'
